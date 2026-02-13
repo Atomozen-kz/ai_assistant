@@ -62,6 +62,23 @@ return [
                 (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+        'report' => [
+            'driver' => 'mysql',
+            'host' => env('REPORT_DB_HOST'),
+            'port' => env('REPORT_DB_PORT', '3306'),
+            'database' => env('REPORT_DB_DATABASE'),
+            'username' => env('REPORT_DB_USERNAME'),
+            'password' => env('REPORT_DB_PASSWORD'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                \PDO::ATTR_TIMEOUT => 5,
+                \PDO::MYSQL_ATTR_SSL_CA => env('REPORT_DB_SSL_CA'), // если нужно
+            ]) : [],
+        ],
 
         'mariadb' => [
             'driver' => 'mariadb',
